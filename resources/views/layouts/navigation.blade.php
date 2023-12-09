@@ -19,14 +19,6 @@
 
                 @hasrole('pustakawan')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('role')" :active="request()->routeIs('role')">
-                        {{ __('Role') }}
-                    </x-nav-link>
-                </div>
-                @endhasrole
-
-                @hasrole('pustakawan')
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index') || request()->routeIs('book.create')">
                         {{ __('Book') }}
                     </x-nav-link>

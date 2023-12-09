@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
         Route::match(['put', 'patch'], '/books/{id}', [BookController::class, 'update'])->name('update');
         Route::delete('/books/{id}', [BookController::class, 'delete'])->name('delete');
         Route::get('/print', [BookController::class, 'print'])->name('print');
+        Route::get('/export', [BookController::class, 'export'])->name('export');
+        Route::post('/import', [BookController::class, 'import'])->name('import');
     });
 });
 
