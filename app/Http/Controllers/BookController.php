@@ -116,7 +116,7 @@ class BookController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('book')->with($notification);
+        return redirect()->route('book.index')->with($notification);
     }
 
     public function print()

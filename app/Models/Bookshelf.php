@@ -8,4 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Bookshelf extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'code',
+        'name'
+    ];
+
+    public static function getDataBookshelves()
+    {
+        $booksshelf = Bookshelf::all();
+        $booksshelf_filter = [];
+
+        $no = 1;
+        for ($i=0; $i < $booksshelf->count(); $i++) {
+            $booksshelf_filter[$i]['no'] = $no++;
+            $booksshelf_filter[$i]['code'] = $booksshelf[$i]->code;
+            $booksshelf_filter[$i]['name'] = $booksshelf[$i]->name;
+        }
+        return $booksshelf_filter;
+    }
 }

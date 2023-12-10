@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Book') }}
+            {{ __('Bookshelves') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -9,9 +9,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="mb-10 flex gap-3">
-                        <x-primary-button tag="a" href="{{route('book.create')}}">Tambah Data Buku</x-primary-button>
-                        <x-primary-button tag="a" href="{{ route('book.print')}}" target='blank'>Cetak Buku</x-primary-button>
-                        <x-primary-button tag="a" href="{{ route('book.export')}}" target="_blank">Export Excel</x-primary-button>
+                        <x-primary-button tag="a" href="{{route('bookshelf.create')}}">Tambah Data Rak Buku</x-primary-button>
+                        <x-primary-button tag="a" href="{{ route('bookshelf.print')}}" target='blank'>Cetak Rak Buku</x-primary-button>
+                        <x-primary-button tag="a" href="{{ route('bookshelf.export')}}" target="_blank">Export Excel</x-primary-button>
                         <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">Import Excel</x-primary-button>
                     </div>
 
@@ -19,40 +19,26 @@
                         <x-slot name="header">
                             <tr>
                                 <th>#</th>
-                                <th>Judul</th>
-                                <th>Penulis</th>
-                                <th>Tahun</th>
-                                <th>Penerbit</th>
-                                <th>Kota</th>
-                                <th>Cover</th>
-                                <th>Kuantitas</th>
                                 <th>Kode Rak</th>
+                                <th>Nama Rak</th>
                                 <th>Aksi</th>
                             </tr>
                         </x-slot>
 
                         @php $num=1; @endphp
-                        @foreach($books as $book)
+                        @foreach($bookshelves as $bookshelf)
                         <tr>
                             <td>{{ $num++ }} </td>
-                            <td>{{ $book->title }}</td>
-                            <td>{{ $book->author }}</td>
-                            <td>{{ $book->year }}</td>
-                            <td>{{ $book->publisher }}</td>
-                            <td>{{ $book->city }}</td>
-                            <td>
-                                <img src="{{ asset('storage/cover_buku/'.$book->cover) }}" class="w-12 h-12 object-cover" />
-                            </td>
-                            <td>{{ $book->quantity }}</td>
-                            <td>{{ $book->bookshelf->code }}-{{ $book->bookshelf->name }}</td>
+                            <td>{{ $bookshelf->code }}</td>
+                            <td>{{ $bookshelf->name }}</td>
                             <td>
                                 <div class="flex gap-3">
-                                    <x-primary-button tag="a" href="{{route('book.edit', $book->id)}}">Edit</x-primary-button>
+                                    <x-primary-button tag="a" href="{{route('bookshelf.edit', $bookshelf->id)}}">Edit</x-primary-button>
 
                                     <x-danger-button
                                         x-data=""
-                                        x-on:click.prevent="$dispatch('open-modal', 'confirm-book-deletion')"
-                                        x-on:click="$dispatch('set-action', '{{route('book.delete', $book->id) }}')">
+                                        x-on:click.prevent="$dispatch('open-modal', 'confirm-bookshelf-deletion')"
+                                        x-on:click="$dispatch('set-action', '{{route('bookshelf.delete', $bookshelf->id) }}')">
                                         {{__('Delete') }}
                                     </x-danger-button>
                                 </div>
@@ -62,7 +48,7 @@
                         @endforeach
                     </x-table>
 
-                    <x-modal name="confirm-book-deletion" focusable maxWidth="xl">
+                    <x-modal name="confirm-bookshelf-deletion" focusable maxWidth="xl">
                         <form method="post" x-bind:action="action" class="p-6">
                             @csrf
                             @method('delete')
@@ -84,11 +70,11 @@
                     </x-modal>
 
                     <x-modal name="import-book" focusable maxWidth="xl">
-                        <form method="post" action="{{ route('book.import') }}" class="p-6" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('bookshelf.import') }}" class="p-6" enctype="multipart/form-data">
                             @csrf
 
                             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-5">
-                                {{ __('Import Data Buku') }}
+                                {{ __('Import Data Rak Buku') }}
                             </h2>
                             <div class="max-w-xl">
                                 <x-input-label for="cover" class="sr-only" value="FileImport"/>

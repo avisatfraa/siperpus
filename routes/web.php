@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookshelfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,11 +36,23 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [BookController::class, 'create'])->name('create');
         Route::post('/create', [BookController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [BookController::class, 'edit'])->name('edit');
-        Route::match(['put', 'patch'], '/books/{id}', [BookController::class, 'update'])->name('update');
-        Route::delete('/books/{id}', [BookController::class, 'delete'])->name('delete');
+        Route::match(['put', 'patch'], '/{id}', [BookController::class, 'update'])->name('update');
+        Route::delete('/{id}', [BookController::class, 'delete'])->name('delete');
         Route::get('/print', [BookController::class, 'print'])->name('print');
         Route::get('/export', [BookController::class, 'export'])->name('export');
         Route::post('/import', [BookController::class, 'import'])->name('import');
+    });
+
+    Route::prefix('/bookshelf')->as('bookshelf.')->group(function () {
+        Route::get('/', [BookshelfController::class, 'index'])->name('index');
+        Route::get('/create', [BookshelfController::class, 'create'])->name('create');
+        Route::post('/create', [BookshelfController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [BookshelfController::class, 'edit'])->name('edit');
+        Route::match(['put', 'patch'], '/{id}', [BookshelfController::class, 'update'])->name('update');
+        Route::delete('/{id}', [BookshelfController::class, 'delete'])->name('delete');
+        Route::get('/print', [BookshelfController::class, 'print'])->name('print');
+        Route::get('/export', [BookshelfController::class, 'export'])->name('export');
+        Route::post('/import', [BookshelfController::class, 'import'])->name('import');
     });
 });
 
