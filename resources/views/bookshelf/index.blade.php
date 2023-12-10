@@ -8,11 +8,25 @@
         <div class="max-w-7xl mx-auto sm-px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="mb-10 flex gap-3">
-                        <x-primary-button tag="a" href="{{route('bookshelf.create')}}">Tambah Data Rak Buku</x-primary-button>
-                        <x-primary-button tag="a" href="{{ route('bookshelf.print')}}" target='blank'>Cetak Rak Buku</x-primary-button>
-                        <x-primary-button tag="a" href="{{ route('bookshelf.export')}}" target="_blank">Export Excel</x-primary-button>
-                        <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">Import Excel</x-primary-button>
+                    <div class="flex justify-between mb-10">
+                        <form action="{{route('bookshelf.index')}}" class="w-1/2">
+                                <div class="flex items-center gap-3">
+                                <x-input-label for="search" value="Cari Rak Buku" />
+                                <x-text-input
+                                    id="search" type="text" name="search" class="mt-1 block w-1/2"
+                                    value="{{ $search }}"
+                                    placeholder="Cari kode atau nama rak buku..."
+                                />
+                                <x-primary-button>Cari</x-primary-button>
+                            </div>
+                        </form>
+
+                        <div class="flex gap-3">
+                            <x-primary-button tag="a" href="{{route('bookshelf.create')}}">Tambah </x-primary-button>
+                            <x-primary-button tag="a" href="{{ route('bookshelf.print')}}" target='blank'>Cetak</x-primary-button>
+                            <x-primary-button tag="a" href="{{ route('bookshelf.export')}}" target="_blank">Export Excel</x-primary-button>
+                            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">Import Excel</x-primary-button>
+                        </div>
                     </div>
 
                     <x-table>

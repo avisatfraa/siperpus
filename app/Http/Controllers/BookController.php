@@ -15,9 +15,13 @@ use Excel;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
-        $data['books'] = Book::with('bookshelf')->get();
+        $data['books'] = Book::with('bookshelf')
+            ->where('title', 'like', '%'.$req->search.'%')
+            ->orWhere('author', 'like', '%'.$req->search.'%')
+            ->get();
+        $data['search'] = $req->search ?? '';
         return view('book.index', $data);
     }
 

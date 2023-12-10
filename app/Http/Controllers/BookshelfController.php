@@ -13,9 +13,12 @@ use Excel;
 
 class BookshelfController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
-        $data['bookshelves'] = Bookshelf::all();
+        $data['bookshelves'] = Bookshelf::where('code', 'like', '%'.$req->search.'%')
+            ->orWhere('name', 'like', '%'.$req->search.'%')
+            ->get();
+        $data['search'] = $req->search ?? '';
         return view('bookshelf.index', $data);
     }
 
