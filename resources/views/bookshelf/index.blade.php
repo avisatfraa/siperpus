@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto sm-px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="flex justify-between mb-10">
+                    <div class="flex items-center justify-between mb-10">
                         <form action="{{route('bookshelf.index')}}" class="w-1/2">
                                 <div class="flex items-center gap-3">
                                 <x-input-label for="search" value="Cari Rak Buku" />
@@ -22,10 +22,41 @@
                         </form>
 
                         <div class="flex gap-3">
-                            <x-primary-button tag="a" href="{{route('bookshelf.create')}}">Tambah </x-primary-button>
-                            <x-primary-button tag="a" href="{{ route('bookshelf.print')}}" target='blank'>Cetak</x-primary-button>
-                            <x-primary-button tag="a" href="{{ route('bookshelf.export')}}" target="_blank">Export Excel</x-primary-button>
-                            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">Import Excel</x-primary-button>
+                            <x-primary-button class="h-9" tag="a" href="{{route('bookshelf.create')}}">
+                                <span class="mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                    </svg>
+                                </span>
+                                Tambah
+                            </x-primary-button>
+                            <x-primary-button class="h-9" tag="a" href="{{ route('bookshelf.print')}}" target='blank'>
+                                <span class="mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                    </svg>
+                                </span>
+                                Cetak
+                            </x-primary-button>
+                            <x-primary-button class="h-9" tag="a" href="{{ route('bookshelf.export')}}" target="_blank">
+                                <span class="mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                                        <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                </span>
+                                Export
+                            </x-primary-button>
+                            <x-primary-button class="h-9" x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">
+                                <span class="mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                                        <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                </span>
+                                Import
+                            </x-primary-button>
                         </div>
                     </div>
 
@@ -35,6 +66,7 @@
                                 <th>#</th>
                                 <th>Kode Rak</th>
                                 <th>Nama Rak</th>
+                                <th>Jumlah Buku</th>
                                 <th>Aksi</th>
                             </tr>
                         </x-slot>
@@ -45,9 +77,11 @@
                             <td>{{ $num++ }} </td>
                             <td>{{ $bookshelf->code }}</td>
                             <td>{{ $bookshelf->name }}</td>
+                            <td>{{ $bookshelf->books->count() }}</td>
                             <td>
                                 <div class="flex gap-3">
-                                    <x-primary-button tag="a" href="{{route('bookshelf.edit', $bookshelf->id)}}">Edit</x-primary-button>
+                                    <x-primary-button class="h-9" tag="a" href="{{route('book.index', ['bookshelf' => $bookshelf->code])}}">Lihat Daftar Buku</x-primary-button>
+                                    <x-primary-button class="h-9" tag="a" href="{{route('bookshelf.edit', $bookshelf->id)}}">Edit</x-primary-button>
 
                                     <x-danger-button
                                         x-data=""
@@ -100,7 +134,7 @@
                                     {{ __('Cancel') }}
                                 </x-secondary-button>
 
-                                <x-primary-button class="ml-3">
+                                <x-primary-button class="h-9" class="ml-3">
                                     {{ __('Upload') }}
                                 </x-primary-button>
                             </div>

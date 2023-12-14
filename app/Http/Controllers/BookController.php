@@ -17,10 +17,22 @@ class BookController extends Controller
 {
     public function index(Request $req)
     {
-        $data['books'] = Book::with('bookshelf')
-            ->where('title', 'like', '%'.$req->search.'%')
-            ->orWhere('author', 'like', '%'.$req->search.'%')
-            ->get();
+        $data = [
+            'search' => $req->search,
+            'bookshelf' => $req->bookshelf
+        ];
+
+        $selectedBookshelf = Bookshelf::where('code', $req->bookshelf)->first();
+        $selectedBookshelfId = isset($selectedBookshelf) ? $selectedBookshelf->id : '';
+
+        $data['books'] = Book::with('bookshelf')->where([
+            ['title', 'like', '%'.$req->search.'%'],
+            ['author', 'like', '%'.$req->search.'%'],
+            ['bookshelf_id', 'like', '%'.$selectedBookshelfId.'%']
+        ])->get();
+
+        $data['bookshelves'] = Bookshelf::all();
+
         $data['search'] = $req->search ?? '';
         return view('book.index', $data);
     }

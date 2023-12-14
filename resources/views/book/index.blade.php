@@ -8,26 +8,65 @@
         <div class="max-w-7xl mx-auto sm-px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="flex justify-between mb-10">
-                        <form action="{{route('book.index')}}" class="w-1/2">
-                                <div class="flex items-center gap-3">
-                                <x-input-label for="search" value="Cari Buku" />
-                                <x-text-input
-                                    id="search" type="text" name="search" class="mt-1 block w-1/2"
-                                    value="{{ $search }}"
-                                    placeholder="Cari buku berdasarkan judul buku atau penulis..."
-                                />
-                                <x-primary-button>Cari</x-primary-button>
-                            </div>
-                        </form>
-
-                        <div class="flex gap-3">
-                            <x-primary-button tag="a" href="{{route('book.create')}}">Tambah</x-primary-button>
-                            <x-primary-button tag="a" href="{{ route('book.print')}}" target='blank'>Cetak</x-primary-button>
-                            <x-primary-button tag="a" href="{{ route('book.export')}}" target="_blank">Export Excel</x-primary-button>
-                            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">Import Excel</x-primary-button>
-                        </div>
+                    <div class="flex justify-end gap-3 mb-10">
+                        <x-primary-button class="h-9" tag="a" href="{{route('book.create')}}">
+                            <span class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                </svg>
+                            </span>
+                            Tambah
+                        </x-primary-button>
+                        <x-primary-button class="h-9" tag="a" href="{{ route('book.print')}}" target='blank'>
+                            <span class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                </svg>
+                            </span>
+                            Cetak
+                        </x-primary-button>
+                        <x-primary-button class="h-9" tag="a" href="{{ route('book.export')}}" target="_blank">
+                            <span class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                                    <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                </svg>
+                            </span>
+                            Export
+                        </x-primary-button>
+                        <x-primary-button class="h-9" x-data="" x-on:click.prevent="$dispatch('open-modal', 'import-book')">
+                            <span class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                                    <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                </svg>
+                            </span>
+                            Import
+                        </x-primary-button>
                     </div>
+                    <form action="{{route('book.index')}}">
+                        <div class="flex items-center mb-10 gap-3">
+                            <div class="flex items-center gap-3 w-1/3">
+                                <x-input-label for="search" value="Cari Buku"/>
+                                <x-text-input
+                                    id="search" type="text" name="search" class="mt-1 flex-grow w-min"
+                                    value="{{ $search }}"
+                                    placeholder="Cari judul buku atau penulis..."
+                                />
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <x-input-label for="bookshelf" value="Rak Buku" />
+                                <x-select-input id="bookshelf" name="bookshelf">
+                                    <option value="">Semua</option>
+                                    @foreach ($bookshelves as $b)
+                                        <option value="{{$b->code}}" {{$bookshelf === $b->code ? 'selected' : ''}}>{{$b->name}}</option>
+                                    @endforeach
+                                </x-select-input>
+                            </div>
+                            <x-primary-button class="h-9">Cari</x-primary-button>
+                        </div>
+                    </form>
 
                     <x-table>
                         <x-slot name="header">
@@ -35,11 +74,8 @@
                                 <th>#</th>
                                 <th>Judul</th>
                                 <th>Penulis</th>
-                                <th>Tahun</th>
-                                <th>Penerbit</th>
-                                <th>Kota</th>
                                 <th>Cover</th>
-                                <th>Kuantitas</th>
+                                <th>Jumlah Buku</th>
                                 <th>Kode Rak</th>
                                 <th>Aksi</th>
                             </tr>
@@ -51,9 +87,6 @@
                             <td>{{ $num++ }} </td>
                             <td>{{ $book->title }}</td>
                             <td>{{ $book->author }}</td>
-                            <td>{{ $book->year }}</td>
-                            <td>{{ $book->publisher }}</td>
-                            <td>{{ $book->city }}</td>
                             <td>
                                 @if($book->cover)
                                     <img src="{{ asset('storage/cover_buku/'.$book->cover) }}" class="w-12 h-12 object-cover" />
